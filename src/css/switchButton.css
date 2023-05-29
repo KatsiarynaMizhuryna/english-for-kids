@@ -1,0 +1,107 @@
+@font-face {
+    font-family: 'Roboto black';
+    src: url(../fonts/Roboto-Black.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Roboto bold';
+    src: url(../fonts/Roboto-Bold.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Roboto medium';
+    src: url(../fonts/Roboto-Medium.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
+
+
+body {
+    background-image: url(../images/background/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    font-family: 'Roboto black', 'Verdana', sans-serif;
+    font-size: 30px;
+    color: #107298;
+}
+
+.switch {
+    position: relative;
+    display: flex;
+    background-color: #76cced;
+    justify-content: space-between;
+    width: 205px;
+    height: 42px;
+    border: none;
+    border-radius: 24px;
+    margin: 6px 0;
+    box-shadow: 13px 13px 27px -5px rgba(14, 118, 198, 0.58);
+}
+
+.switch__round {
+    position: absolute;
+    width: calc(50% - 10px);
+    height: calc(100% - 10px);
+    top: 5px;
+    left: 5px;
+    background-color: #f6f6f6;
+    border-radius: 24px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.active .switch__round,
+.switch.active:nth-child(2):after {
+    left: calc(50% + 5px);
+}
+
+.switch:nth-child(2):after {
+    content: "";
+    position: absolute;
+    width: calc(50% - 10px);
+    height: calc(100% - 10px);
+    top: 5px;
+    left: 5px;
+    background-color: red;
+    border-radius: 24px;
+    transition: 2s;
+}
+
+.switch__round__train, .switch__round__play {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    font-family: 'Roboto black', "Verdana", sans-serif;
+    font-size: 23px;
+    color: #107298;
+}
+
+.switch__round__train {
+    margin-left: 25px;
+}
+
+.switch__round__play {
+    margin-right: 25px;
+}
+
+.text__hidden {
+    opacity: 0;
+    visibility: hidden;
+}
