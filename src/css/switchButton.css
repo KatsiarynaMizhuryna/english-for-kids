@@ -20,13 +20,12 @@
 }
 
 :root {
-    --main-color: #555;
+    --main-color: #23085A;
 }
 
 body {
-    background-image: url(../images/background/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: #FAE39C;
+
 }
 
 .wrapper {
@@ -38,25 +37,28 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: linear-gradient(180deg, #FFE300 -29.43%, #FF8200 100%);
+    margin-bottom: 20px;
+    padding: 0 20px;
 }
 
 .header__logo {
     font-family: 'Roboto black', 'Verdana', sans-serif;
-    font-size: 30px;
-    color: var(--main-color);
+    font-size: 25px;
+    color: #23085A;
 }
 
 .switch {
     position: relative;
     display: flex;
-    background-color: rgba(153, 220, 203, 0.93);
+    background: #AB0033;
     justify-content: space-between;
-    width: 205px;
+    width: 180px;
     height: 42px;
     border: none;
     border-radius: 24px;
     margin: 6px 0;
-    box-shadow: 13px 13px 27px -5px rgba(14, 118, 198, 0.58);
+    box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
 }
 
 .switch__round {
@@ -90,9 +92,9 @@ body {
 .switch__round__train, .switch__round__play {
     margin-top: 4px;
     margin-bottom: 8px;
-    font-family: 'Roboto black', "Verdana", sans-serif;
+    font-family: 'Roboto medium', "Verdana", sans-serif;
     font-size: 23px;
-    color: var(--main-color);
+    color: #FFE300;
 }
 
 .switch__round__train {
