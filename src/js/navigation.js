@@ -1,7 +1,3 @@
-//import {chooseCategory} from '/src/js/categories.js';
-//import {createCategories} from '/src/js/categories.js';
-import cards from '/src/js/cards.js';
-
 //function to open the burger menu
 function openBurgerMenu(burgerIcon, menuNavigation) {
     burgerIcon = document.querySelector(".menu_icon");

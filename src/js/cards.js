@@ -1,36 +1,44 @@
 const cards = [
     [
         {
+            id: 0,
             word: 'Action (set A)',
             image: "/src/images/main%20page/actions.png"
         }
         ,
         {
+            id: 1,
             word: 'Action (set B)',
             image: "/src/images/main%20page/actions2.png"
         },
 
         {
+            id: 2,
             word: 'Animal (set A)',
             image: "/src/images/main%20page/animals.png"
         },
         {
+            id: 3,
             word: 'Animal (set B)',
             image: "/src/images/main%20page/animals2.png"
         },
         {
+            id: 4,
             word: 'Clothes',
             image: "/src/images/main%20page/clothes.png"
         },
         {
+            id: 5,
             word: 'Emotions',
             image: "/src/images/main%20page/emotions.png"
         },
         {
+            id: 6,
             word: 'Fruits',
             image: "/src/images/main%20page/fruits.png"
         },
         {
+            id: 7,
             word: 'Food',
             image: "/src/images/main%20page/food.png"
         }],

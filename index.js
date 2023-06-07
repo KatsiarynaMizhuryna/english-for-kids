@@ -1,9 +1,8 @@
 import cards from './src/js/cards.js';
-import {createSwitchButton} from './src/js/switchButton.js';
+import {createCategories, navigation, renderCategoryCards, sayPronunciation, cardRotate} from './src/js/categories.js';
+import {startReplayHandler} from './src/js/game.js';
 import {openBurgerMenu} from './src/js/navigation.js';
-import {createCategories, navigation} from './src/js/categories.js';
-import {chooseCategory, sayPronunciation, cardRotate} from './src/js/categories.js';
-
+import {createSwitchButton} from './src/js/switchButton.js';
 
 
 
