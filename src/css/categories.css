@@ -35,6 +35,9 @@
 }
 
 .categories, .categories_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: #fff;;
     padding: 5px;
     box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2) inset;

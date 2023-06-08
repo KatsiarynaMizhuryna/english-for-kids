@@ -1,13 +1,12 @@
 import cards from '/src/js/cards.js';
 import {startReplayHandler} from '/src/js/game.js';
 
-console.log(cards)
 
 let correctAnswers = 0;
 let wrongAnswers = 0;
 
 // create cards for main page
-function createCategories() {
+export function createCategories() {
     let categoriesContainer = document.querySelector(".categories__container");
     let switchBlock = document.querySelector(".switch");
     let startButton = document.querySelector(".start__button");
@@ -22,21 +21,28 @@ function createCategories() {
     })
     let categories = document.querySelectorAll(".categories");
     categories.forEach((category) => {
-        category.addEventListener('click', renderCategoryCards)
+        category.addEventListener('click', (event) => {
+            renderCategoryCards(event, event.currentTarget.id)
+        })
     })
     if (switchBlock.classList.contains('active')) {
         startButton.classList.remove('active__button')
     }
 }
 
-function renderCategoryCards(event) {  // TODO: generate based on app mode (train/play)
-    const cardsElements = cards.slice(1, cards.length);
+export function renderCategoryCards(event, i) {
+    const cardsElements = cards.slice(1);
     let categoriesContainer = document.querySelector(".categories__container");
     let switchBlock = document.querySelector(".switch");
     let startButton = document.querySelector(".start__button");
+    //let categoryId = event.currentTarget.id;
+    console.log(event.target.parentElement) // TODO: refactor in navigation
+    let categoryName = event.currentTarget.querySelector(".categories_text") ?
+        event.currentTarget.querySelector(".categories_text").innerText : event.currentTarget.innerText;
 
     categoriesContainer.innerHTML = '';
-    cardsElements[event.target.parentElement.id].forEach((el, index) => {
+    categoriesContainer.setAttribute('category', categoryName);
+    cardsElements[i].forEach((el, index) => {
         categoriesContainer.innerHTML += `
             <div class="categories_card" id="${index}">
                 <div class="card-front">
@@ -54,7 +60,7 @@ function renderCategoryCards(event) {  // TODO: generate based on app mode (trai
                 </div>          
             </div>`
     })
-    
+
     // add event listener for cards
     let categoryCards = document.querySelectorAll(".categories_card")
     categoryCards.forEach(card => {
@@ -65,22 +71,36 @@ function renderCategoryCards(event) {  // TODO: generate based on app mode (trai
     if (switchBlock.classList.contains('active')) {
         startButton.classList.add('active__button')
     }
-    startButton.addEventListener('click', () => {
+    gameStart(startButton)
+}
+
+function gameStart(button) {
+    button.addEventListener('click', () => {
         let categoriesInfo = document.querySelectorAll(".categories_info");
         categoriesInfo.forEach(cardInfo => cardInfo.classList.add("hidden"));
-        startButton.innerHTML = '';
-        startButton.classList.add("repeat")
-        setTimeout(startReplayHandler, 1000)//startReplayHandler();
+        button.innerHTML = '';
+        button.classList.add("repeat")
+        setTimeout(startReplayHandler, 1000);
     })
 }
 
 
 function cardOnClickHandler(event) {
     let switchBlock = document.querySelector(".switch");
-    let selectedCard = event.target.closest(".categories_card")
+    let selectedCard = event.target.closest(".categories_card");
+    let stats = JSON.parse(localStorage.getItem('stats'));
+    let keyWord = selectedCard.querySelector('.categories_text').innerText;
+    let categoryName = selectedCard.parentElement.getAttribute('category');
+
+
     if (event.target.className === 'rotate_icon') {
         event.preventDefault();
         selectedCard.classList.add("card-turn");
+        stats[categoryName][keyWord]['train'] += 1;
+        localStorage.setItem('stats', JSON.stringify(stats));
+        console.log(keyWord, categoryName)
+
+
     } else if (event.target.className === 'sound_icon') {
         event.preventDefault();
         sayPronunciation(selectedCard);
@@ -90,7 +110,6 @@ function cardOnClickHandler(event) {
         let categoryCardsArr = Array.from(categoryCards);
         const correct = document.querySelector('.correct');
         const wrong = document.querySelector('.wrong');
-
 
         let curCardId = categoryCardsArr.map(
             (card) => card.hasAttribute("is_current") ? card.getAttribute("id") : null
@@ -116,7 +135,7 @@ function cardOnClickHandler(event) {
             if (cardFilteredIds.length > 0) {
                 categoryCardsArr[nextCardId].setAttribute("is_current", "true");
                 let soundPath = categoryCardsArr[nextCardId].querySelector('audio').getAttribute("src");
-                setTimeout(playSound, 1000, soundPath)//playSound(soundPath)
+                setTimeout(playSound, 1000, soundPath)
                 playSound("/src/sounds/Result/correct.mp3")
                 correct.innerHTML += `<img class="star" src="/src/images/icons/star.png" alt="correct star">`;
                 correctAnswers += 1;
@@ -125,26 +144,44 @@ function cardOnClickHandler(event) {
                 document.querySelector(".start__button").classList.remove('active__button', 'repeat');
                 correct.innerHTML = '';
                 wrong.innerHTML = '';
-                gameResults(wrongAnswers);
-                console.log(correct)
+                setTimeout(gameResults, 1000, wrongAnswers);
             }
-            console.log('Correct answer');
-            console.log(cardFilteredIds);
 
+            stats[categoryName][keyWord]['hit'] += 1;
+            localStorage.setItem('stats', JSON.stringify(stats));
         } else {
+            let currentCard = document.querySelector('[is_current]').querySelector('.categories_text').innerText
             //categoryCards[curCardId].setAttribute("skip", "true");
             console.log('Wrong!');
             playSound("/src/sounds/Result/error.mp3");
             wrong.innerHTML += `<img class="star" src="/src/images/icons/star-wrong.png" alt="wrong star">`;
             wrongAnswers += 1;
+            stats[categoryName][currentCard]['miss'] += 1;
+            localStorage.setItem('stats', JSON.stringify(stats));
         }
     }
 
     console.log('Correct answers: ' + correctAnswers + '\nWrong answers: ' + wrongAnswers)
 }
 
+
+function initLocalStorage() {
+    if (localStorage.getItem('stats') === null) {
+        let stats = {};
+        for (let [i, v] of cards[0].entries()) {
+            stats[v.word] = {};
+            for (let card of cards[i + 1]) {
+                stats[v.word][card.word] = {'train': 0, 'hit': 0, 'miss': 0, 'translation': card.translation};
+            }
+        }
+        localStorage.setItem('stats', JSON.stringify(stats));
+    }
+}
+
+initLocalStorage();
+
 //create a function to pronounce a word
-function sayPronunciation(selectedCard) {
+export function sayPronunciation(selectedCard) {
     let play = selectedCard.querySelector("audio")
     const audio = new Audio();
     audio.src = play.getAttribute("src");
@@ -152,7 +189,7 @@ function sayPronunciation(selectedCard) {
 }
 
 //card rotation function
-function cardRotate(event) {
+export function cardRotate(event) {
     const SelectedCard = event.target.closest(".categories_card");
     SelectedCard.classList.remove("card-turn");
 }
@@ -161,12 +198,14 @@ export function navigation() {
     let burgerIcon = document.querySelector(".menu_icon");
     let menuNavigation = document.querySelector(".menu__navigation");
     let navigationLinks = document.querySelectorAll(".navigation-link")
-    navigationLinks.forEach(navigationLink => {
+    navigationLinks.forEach((navigationLink, index) => {
         navigationLink.addEventListener('click', event => {
             document.body.classList.toggle("lock");
             menuNavigation.classList.toggle("active");
             burgerIcon.classList.toggle("active");
-            renderCategoryCards(event)
+            // console.log(navigationLink)
+            // console.log(index)
+            renderCategoryCards(event, index)
         })
     })
     let navigationMainPage = document.querySelector(".navigation-link-main");
@@ -186,6 +225,8 @@ function playSound(path) {
 
 function gameResults(wrong) {
     let switchBlock = document.querySelector(".switch");
+    let train = document.querySelector(".switch__round__train");
+    let play = document.querySelector(".switch__round__play");
     let categoriesContainer = document.querySelector(".categories__container");
     categoriesContainer.innerHTML = '';
 
@@ -201,15 +242,9 @@ function gameResults(wrong) {
     }
     setTimeout(() => {
         categoriesContainer.innerHTML = '';
-        switchBlock.classList.remove('active');      
+        switchBlock.classList.toggle('active');
+        train.classList.toggle("text__hidden");
+        play.classList.toggle("text__hidden");
         createCategories();
     }, 3000);
 }
-
-
-createCategories();
-navigation();
-
-export {createCategories}
-export {renderCategoryCards}
-export {sayPronunciation, cardRotate}

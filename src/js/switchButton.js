@@ -1,4 +1,4 @@
-function createSwitchButton() {
+export function createSwitchButton() {
     let switchBlock = document.querySelector(".switch");
 
     switchBlock.addEventListener("click", function () {
@@ -21,6 +21,3 @@ function createSwitchButton() {
         }
     });
 }
-
-createSwitchButton();
-export {createSwitchButton};

@@ -37,10 +37,11 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     background: #E4C9F9;
     margin-bottom: 20px;
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .header__logo {
@@ -51,4 +52,5 @@ body {
 
 main {
     margin-bottom: 40px;
+    padding: 0 15px;
 }

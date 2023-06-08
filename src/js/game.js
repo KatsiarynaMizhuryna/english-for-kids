@@ -19,8 +19,3 @@ export function startReplayHandler() {
         audio.play();
     }
 }
-
-
-
-
-
