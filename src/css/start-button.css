@@ -1,0 +1,47 @@
+.start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.start__button {
+    border: none;
+    background: #AAF1CB;
+    font-family: 'Roboto medium', "Verdana", sans-serif;
+    font-size: 23px;
+    box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+    border-radius: 24px;
+    width: 160px;
+    height: 50px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.active__button {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden {
+    display: none;
+}
+
+.repeat {
+    background-image: url("/src/images/icons/repeat.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.star {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+}

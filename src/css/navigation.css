@@ -1,0 +1,115 @@
+/* styles for burger-menu*/
+.lock {
+    overflow: hidden;
+}
+
+.menu_icon {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.menu_icon span,
+.menu_icon::before,
+.menu_icon::after {
+    z-index: 12;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: #23085A;
+}
+
+.menu_icon::before,
+.menu_icon::after {
+    content: '';
+}
+
+.menu_icon::before {
+    top: 0;
+    height: 5px;
+}
+
+.menu_icon::after {
+    bottom: 0;
+    height: 5px;
+}
+
+.menu_icon span {
+    top: 50%;
+    transform: scale(1) translate(0px, -50%);
+    height: 5px;
+}
+
+.menu_icon.active span {
+    transform: scale(0) translate(0px, -50%);
+    height: 16px;
+}
+
+.menu_icon.active::before {
+    top: 50%;
+    transform: rotate(-45deg) translate(0px, -50%);
+    background-color: #ffffff;
+    border-radius: 16px;
+}
+
+.menu_icon.active::after {
+    bottom: 50%;
+    transform: rotate(45deg) translate(0px, 50%);
+    background-color: #ffffff;
+    border-radius: 13px;
+}
+
+/* styles for navigation*/
+li {
+    list-style: none;
+}
+
+.navigation__list {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding-left: 10px;
+    z-index: 10;
+}
+
+.navigation-icon {
+    width: 30px;
+    height: 30px;
+}
+
+a.navigation-link, a.navigation-statistic, a.navigation-link-main {
+    text-decoration: none;
+    font-family: 'Roboto medium', 'Verdana', sans-serif;
+    font-size: 25px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 5px;
+}
+
+.navigation__list li:hover {
+    border: 1px solid #ffffff;
+    border-radius: 15px;
+    transition: transform 0.9s;
+    background: #E4C9F9;
+}
+
+.menu__navigation {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 320px;
+    height: 100%;
+    background: #AAF1CB;
+    padding: 103px 0 30px 0;
+    transition: all 0.6s ease 0s;
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+    left: 0;
+}

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>English for kids</title>
+    <link rel="stylesheet" href="../src/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="../src/css/style.css" type="text/css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header__menu">
+        <div class="menu_icon"><span></span></div>
+        <nav class="menu__navigation">
+            <ul class="navigation__list">
+                <li>
+                    <img class="navigation-icon" src=/src/images/icons/main.png alt="Main page">
+                    <a href="#" class="navigation-link-main">Main page</a></li>
+                <li id="0">
+                    <img class="navigation-icon" src="/src/images/icons/action1.png" alt="Action (set A)">
+                    <a href="#" class="navigation-link categories_text">Action (set A)</a>
+                </li>
+                <li id="1">
+                    <img class="navigation-icon" src="/src/images/icons/action2.png" alt="Action (set B)">
+                    <a href="#" class="navigation-link categories_text">Action (set B)</a>
+                </li>
+                <li id="2">
+                    <img class="navigation-icon" src="/src/images/icons/animals1.png" alt="Animal (set A)">
+                    <a href="#" class="navigation-link categories_text">Animal (set A)</a>
+                </li>
+                <li id="3">
+                    <img class="navigation-icon" src="/src/images/icons/animals2.png" alt="Animal (set B)">
+                    <a href="#" class="navigation-link categories_text">Animal (set B)</a></li>
+                <li id="4">
+                    <img class="navigation-icon" src="/src/images/icons/clothes.png" alt="Clothes">
+                    <a href="#" class="navigation-link categories_text">Clothes</a>
+                </li>
+                <li id="5">
+                    <img class="navigation-icon" src="/src/images/icons/emotions.png" alt="Emotions">
+                    <a href="#" class="navigation-link categories_text">Emotions</a>
+                </li>
+                <li id="6">
+                    <img class="navigation-icon" src="/src/images/icons/fruits.png" alt="Fruits">
+                    <a href="#" class="navigation-link categories_text">Fruits</a>
+                </li>
+                <li id="7">
+                    <img class="navigation-icon" src="/src/images/icons/food.png" alt="Food">
+                    <a href="#" class="navigation-link categories_text">Food</a>
+                </li>
+                <li>
+                    <img class="navigation-icon" src=/src/images/icons/statistics.png alt="Statistics">
+                    <a href="#" class="navigation-statistic">Statistics</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="header__logo">
+        <h1>English for Kids</h1>
+        <!--<h2>Train & Play</h2>-->
+    </div>
+    <div class="switch">
+        <div class="switch__round"></div>
+        <div id="playMode" class="switch__round__play text__hidden">Play</div>
+        <div class="switch__round__train ">Train</div>
+    </div>
+</header>
+
+<main>
+    <div class="wrapper">
+        <div class="start">
+            <p class="wrong"></p>
+            <button class="start__button">START</button>
+            <p class="correct"></p>
+        </div>
+        <div class="categories__container"></div>
+    </div>
+</main>
+
+
+<script type="module" src='../index.js'></script>
+</body>
+</html>
